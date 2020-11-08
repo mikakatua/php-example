@@ -24,7 +24,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'dockerhub-mikakatua'
-        repository: 'mikakatua/php-example'
+        repository: '$(imageName)'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         addPipelineData: false
