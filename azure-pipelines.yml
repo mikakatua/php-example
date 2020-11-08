@@ -9,7 +9,6 @@ resources:
 - repo: self
 
 variables:
-name:
   imageName: 'mikakatua/php-example'
   tag: '$(Build.BuildId)'
 
