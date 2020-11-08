@@ -14,23 +14,32 @@ variables:
 
 stages:
 - stage: Build
-  displayName: Build image
+  displayName: Build
   jobs:  
-  - job: Build
+  - job: Job
     displayName: Build
     pool:
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          $(tag)
-    - task: Docker@2
-      displayName: Push an image
       inputs:
         containerRegistry: 'dockerhub-mikakatua'
-        repository: '$(imageName)'
-        command: push
+        repository: 'mikakatua/php-example'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        addPipelineData: false
+
+#    - task: Docker@2
+#      displayName: Build an image
+#      inputs:
+#        command: build
+#        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+#        tags: |
+#          $(tag)
+
+#    - task: Docker@2
+#      displayName: Push an image
+#      inputs:
+#        containerRegistry: 'dockerhub-mikakatua'
+#        repository: '$(imageName)'
+#        command: push
