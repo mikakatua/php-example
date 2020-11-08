@@ -23,23 +23,26 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'dockerhub-mikakatua'
-        repository: '$(imageName)'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        addPipelineData: false
-
-#    - task: Docker@2
-#      displayName: Build an image
-#      inputs:
-#        command: build
-#        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-#        tags: |
-#          $(tag)
-
-#    - task: Docker@2
-#      displayName: Push an image
-#      inputs:
 #        containerRegistry: 'dockerhub-mikakatua'
 #        repository: '$(imageName)'
-#        command: push
+#        command: 'buildAndPush'
+#        Dockerfile: '**/Dockerfile'
+#        addPipelineData: false
+
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'dockerhub-mikakatua'
+        repository: '$(imageName)'
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
+        addPipelineData: false
+
+    - task: Docker@2
+      displayName: Push an image
+      inputs:
+        containerRegistry: 'dockerhub-mikakatua'
+        repository: '$(imageName)'
+        command: 'push'
+        addPipelineData: false
